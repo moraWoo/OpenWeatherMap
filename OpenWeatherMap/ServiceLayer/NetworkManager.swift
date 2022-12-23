@@ -86,11 +86,9 @@ class NetworkManager: NetworkManagerProtocol {
                     print(error)
                 }
             }
-        
         dispatchGroup.notify(queue: .main) {
             DispatchQueue.global().async {
-                print("Finished2")
-                print("notify2: \(self.presenter?.coordinates)")
+                print("Finished")
             }
         }
     }

@@ -38,7 +38,6 @@
 		77A4959229489F0500068D21 /* HourlyForecastCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A4959129489F0500068D21 /* HourlyForecastCollectionViewCell.swift */; };
 		77A4959C2948F7A400068D21 /* HeaderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A4959B2948F7A400068D21 /* HeaderCollectionViewCell.swift */; };
 		77B3F1082954C6C6008EAEB3 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B3F1072954C6C6008EAEB3 /* Colors.swift */; };
-		77B3F10C2954EC16008EAEB3 /* CurrentLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B3F10B2954EC16008EAEB3 /* CurrentLocation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,7 +73,6 @@
 		77A4959129489F0500068D21 /* HourlyForecastCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyForecastCollectionViewCell.swift; sourceTree = "<group>"; };
 		77A4959B2948F7A400068D21 /* HeaderCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCollectionViewCell.swift; sourceTree = "<group>"; };
 		77B3F1072954C6C6008EAEB3 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
-		77B3F10B2954EC16008EAEB3 /* CurrentLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLocation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,7 +164,6 @@
 			isa = PBXGroup;
 			children = (
 				771077D1294F33B00049E032 /* WeatherLocale.swift */,
-				77B3F10B2954EC16008EAEB3 /* CurrentLocation.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -315,7 +312,6 @@
 				771077CD294E37E10049E032 /* Hour.swift in Sources */,
 				771077C5294E37E10049E032 /* Condition.swift in Sources */,
 				7792F4DB2950D65B00994E50 /* TextInfoCollectionViewCell.swift in Sources */,
-				77B3F10C2954EC16008EAEB3 /* CurrentLocation.swift in Sources */,
 				77A4959C2948F7A400068D21 /* HeaderCollectionViewCell.swift in Sources */,
 				771077CF294E3DB00049E032 /* Icon.swift in Sources */,
 				771077C7294E37E10049E032 /* Forecast.swift in Sources */,

@@ -67,11 +67,9 @@ class MainPresenter: MainViewPresenterProtocol {
     func getCoordinates() {
         locationCoordinateManager.getCoordinates { [weak self] coordinatesFromLocMan in
             guard let self = self else { return }
-            print("1.mainPresenter: \(coordinatesFromLocMan)++")
             self.coordinates = coordinatesFromLocMan
             self.view?.success()
         }
         self.getDataFromWheatherApiWithCoordinates(url: self.coordinates)
-        print("2.mainPresenter\(self.coordinates)")
     }
 }
