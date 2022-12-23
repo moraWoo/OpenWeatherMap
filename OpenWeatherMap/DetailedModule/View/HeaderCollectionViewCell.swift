@@ -104,7 +104,6 @@ class HeaderCollectionViewCell: UIView {
         label.textColor = .white
         label.numberOfLines = 1
         label.textAlignment = .left
-        label.text = "8" + "º" + "| " + (textDiscription ?? "")
         return label
     }()
     
@@ -141,6 +140,7 @@ class HeaderCollectionViewCell: UIView {
         guard let temperature = temperature else { return }
         var stringLabel = String(format: "%.1f", temperature)
         tempLabel.text = stringLabel + "º"
+        tempAndWeatherSecondLabel.text = (String(temperature) + "º" + "| " + (textDiscription ?? ""))
 
         guard let highTemp = highTemp else { return }
         stringLabel = String(format: "%.1f", highTemp)

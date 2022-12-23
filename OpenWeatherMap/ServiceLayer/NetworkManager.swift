@@ -32,8 +32,8 @@ class NetworkManager: NetworkManagerProtocol {
         "Netivot",
         "Karmie"
     ]
-    var forecastHourly: [ForecastHourLocale] = []
-    var forecastWeekly: [ForecastWeeklyLocale] = []
+    var forecastHourly: ForecastHourLocale?
+    var forecastWeekly: ForecastWeeklyLocale?
     var citiesWithInfo: [City] = []
     var coordinates: String?
     let dispatchGroup = DispatchGroup()
@@ -94,51 +94,64 @@ class NetworkManager: NetworkManagerProtocol {
     }
     
     func modelJsonToModel(fromStatic: Bool, _ weatherJson: Weather?) -> WeatherLocale {
-        
-        let forecastDayDataTemp = weatherJson?.forecast?.forecastday?[0].hour?.filter({$0.tempC != nil}).map({$0.tempC})
-        let forecastDayDataEpoch = weatherJson?.forecast?.forecastday?[0].hour?.filter({$0.timeEpoch != nil}).map({$0.timeEpoch})
-        let forecastDayDataConditionCode = weatherJson?.forecast?.forecastday?[0].hour?.filter({$0.condition?.code != nil}).map({$0.condition?.code})
-        
-        for i in 0 ..< (forecastDayDataTemp?.count ?? 0) {
-            forecastHourly.append(ForecastHourLocale(
-                avgtempC: forecastDayDataTemp?[i],
-                timeEpoch: forecastDayDataEpoch?[i],
-                conditionCode: forecastDayDataConditionCode?[i]
-            ))
+        var forecastDayDataTemp: [Double] = []
+        var forecastDayDataEpoch: [Int] = []
+        var forecastDayDataConditionCode: [Int] = []
+
+        for i in 0 ... 23 {
+            forecastDayDataTemp.append(weatherJson?.forecast?.forecastday?[0].hour?[i].tempC ?? 0)
+            forecastDayDataEpoch.append(weatherJson?.forecast?.forecastday?[0].hour?[i].timeEpoch ?? 0)
+            forecastDayDataConditionCode.append(weatherJson?.forecast?.forecastday?[0].hour?[i].condition?.code ?? 0)
         }
         
-        let forecastWeeklyDate = weatherJson?.forecast?.forecastday?.filter({$0.day != nil}).map({$0.date})
+        forecastHourly = ForecastHourLocale(avgtempC: forecastDayDataTemp, timeEpoch: forecastDayDataEpoch, conditionCode: forecastDayDataConditionCode)
+        
+        var forecastWeeklyDate: [String] = []
+        var forecastWeeklyMaxTemp: [Double] = []
+        var forecastWeeklyMinTemp: [Double] = []
+        var forecastWeeklyHumidity: [Double] = []
+        var forecastWeeklyCondCode: [Int] = []
 
-        for i in 0 ..< (forecastWeeklyDate?.count ?? 0) {
-            let forecastWeeklyMaxTemp = weatherJson?
+        for i in 0 ... 2 {
+            forecastWeeklyDate.append(weatherJson?
+                .forecast?
+                .forecastday?[i]
+                .date ?? ""
+            )
+            forecastWeeklyMaxTemp.append(weatherJson?
                 .forecast?
                 .forecastday?[i]
                 .day?
-                .maxtempC
-            let forecastWeeklyMinTemp = weatherJson?
+                .mintempC ?? 0
+            )
+            forecastWeeklyMinTemp.append(weatherJson?
                 .forecast?
                 .forecastday?[i]
                 .day?
-                .mintempC
-            let forecastWeeklyHumidity = weatherJson?
+                .mintempC ?? 0
+            )
+            forecastWeeklyHumidity.append(weatherJson?
                 .forecast?
                 .forecastday?[i]
                 .day?
-                .avghumidity
-            let forecastWeeklyCondCode = weatherJson?
+                .avghumidity ?? 0
+            )
+            forecastWeeklyCondCode.append(weatherJson?
                 .forecast?
                 .forecastday?[i]
                 .day?
                 .condition?
-                .code
-            forecastWeekly.append(ForecastWeeklyLocale(
-                date: forecastWeeklyDate?[i],
-                maxtempC: forecastWeeklyMaxTemp,
-                mintempC: forecastWeeklyMinTemp,
-                avghumidity: forecastWeeklyHumidity,
-                conditionCode: forecastWeeklyCondCode
-            ))
+                .code ?? 0
+            )
         }
+        
+        forecastWeekly = ForecastWeeklyLocale(
+            date: forecastWeeklyDate,
+            maxtempC: forecastWeeklyMaxTemp,
+            mintempC: forecastWeeklyMinTemp,
+            avghumidity: forecastWeeklyHumidity,
+            conditionCode: forecastWeeklyCondCode
+        )
                 
         let city = City(
             city: weatherJson?.location?.name,
@@ -179,6 +192,7 @@ class NetworkManager: NetworkManagerProtocol {
     func addWeatherLocaleWithCoordinates(_ city: City) {
         citiesWithInfo.insert(city, at: 0)
     }
+    
     
 }
 

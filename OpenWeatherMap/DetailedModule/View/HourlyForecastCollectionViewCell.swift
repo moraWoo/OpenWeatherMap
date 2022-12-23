@@ -24,7 +24,7 @@ class HourlyForecastCollectionViewCell: UICollectionViewCell {
         return stackView
     }()
     
-    private lazy var firstLabel: UILabel = {
+    private lazy var hourLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 15, weight: .bold)
@@ -47,7 +47,7 @@ class HourlyForecastCollectionViewCell: UICollectionViewCell {
     private lazy var temperatureLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        label.font = UIFont.systemFont(ofSize: 20, weight: .light)
         label.numberOfLines = 1
         label.textAlignment = .right
         label.text = "-10" + "º"
@@ -68,10 +68,10 @@ class HourlyForecastCollectionViewCell: UICollectionViewCell {
             stackViewOfItems.leftAnchor.constraint(equalTo: leftAnchor, constant: 10),
             stackViewOfItems.rightAnchor.constraint(equalTo: rightAnchor, constant: -10)
         ])
-        stackViewOfItems.addArrangedSubview(firstLabel)
+        stackViewOfItems.addArrangedSubview(hourLabel)
         stackViewOfItems.addArrangedSubview(imageWeather)
         stackViewOfItems.addArrangedSubview(temperatureLabel)
-        firstLabel.text = timeEpoch
+        hourLabel.text = timeEpoch
         temperatureLabel.text = (temp ?? "") + "º"
         
         let image = String(imageNameFromData ?? 1000)

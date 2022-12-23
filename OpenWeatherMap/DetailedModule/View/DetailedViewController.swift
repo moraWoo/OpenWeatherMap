@@ -370,54 +370,21 @@ extension DetailedViewController {
     }
     
     func weatherDataToHourlyForecast() {
-        for i in 0...23 {
-            let timeEpoch = weatherDataCity?.forecastday?[i].timeEpoch
-            hourlyForecastDataTimeEpoch.append(timeEpoch ?? 0)
-        }
-        
-        for i in 0...23 {
-            let temp = (weatherDataCity?.forecastday?[i].avgtempC)
-            hourlyForecastDataTemp.append(temp ?? 0)
-        }
-        
-        for i in 0...23 {
-            let code = (weatherDataCity?.forecastday?[i].conditionCode)
-            hourlyForecastDataCode.append(code ?? 0)
-        }
+        hourlyForecastDataTimeEpoch = weatherDataCity?.forecastday?.timeEpoch ?? [0]
+        hourlyForecastDataTemp = weatherDataCity?.forecastday?.avgtempC ?? [0]
+        hourlyForecastDataCode = weatherDataCity?.forecastday?.conditionCode ?? [0]
     }
     
     func weatherDataToWeeklyForecast() {
-        
         for i in 0...2 {
-            let weekday = getDayNameBy(
-                stringDate:
-                    weatherDataCity?
-                    .forecastWeekly?[i]
-                    .date ?? ""
-            )
-
+            let day = weatherDataCity?.forecastWeekly?.date?[i] ?? ""
+            let weekday = getDayNameBy(stringDate: day)
             weeklyForecastDate.append(weekday)
             
-            weeklyForecastHighTemp.append(
-                weatherDataCity?
-                    .forecastWeekly?[i]
-                    .maxtempC ?? 0
-            )
-            weeklyForecastLowTemp.append(
-                weatherDataCity?
-                    .forecastWeekly?[i]
-                    .mintempC ?? 0
-            )
-            weeklyForecastHumidity.append(
-                weatherDataCity?
-                    .forecastWeekly?[i]
-                    .avghumidity ?? 0
-            )
-            weeklyForecastCondCode.append(
-                weatherDataCity?
-                    .forecastWeekly?[i]
-                    .conditionCode ?? 0
-            )
+            weeklyForecastHighTemp = weatherDataCity?.forecastWeekly?.maxtempC ?? [0]
+            weeklyForecastLowTemp = weatherDataCity?.forecastWeekly?.mintempC ?? [0]
+            weeklyForecastHumidity = weatherDataCity?.forecastWeekly?.avghumidity ?? [0]
+            weeklyForecastCondCode = weatherDataCity?.forecastWeekly?.conditionCode ?? [0]
         }
     }
     

@@ -126,9 +126,9 @@
 			children = (
 				77A4958329421C6400068D21 /* Builder.swift */,
 				77A4958129421AB700068D21 /* ServiceLayer */,
-				77A4958229421AE200068D21 /* Apps */,
 				77A49589294889F800068D21 /* DetailedModule */,
 				77A495782940A48600068D21 /* MainModule */,
+				77A4958229421AE200068D21 /* Apps */,
 			);
 			path = OpenWeatherMap;
 			sourceTree = "<group>";
@@ -196,16 +196,8 @@
 			children = (
 				77A4958C29488A3B00068D21 /* View */,
 				77A4958B29488A3300068D21 /* Presenter */,
-				77A4958A29488A1800068D21 /* Model */,
 			);
 			path = DetailedModule;
-			sourceTree = "<group>";
-		};
-		77A4958A29488A1800068D21 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		77A4958B29488A3300068D21 /* Presenter */ = {
