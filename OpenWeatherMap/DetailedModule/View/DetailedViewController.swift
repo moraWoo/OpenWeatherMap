@@ -167,45 +167,50 @@ class DetailedViewController: UIViewController, DetailedViewProtocol, UICollecti
         scrollView.addSubview(viewHeader)
     }
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-    let headerViewInitialY = self.viewHeader.frame.origin.y
-    scrollView.addSubview(self.viewHeader)
-    scrollView.delegate = self
-    var headerFrame = viewHeader.frame
-    headerFrame.origin.y = CGFloat(max(headerViewInitialY, scrollView.contentOffset.y))
-    viewHeader.frame = headerFrame
-    let yHeader = scrollView.contentOffset.y + 400
-    self.heightHead.constant = 150
-    
-    HeaderCollectionViewCell.animate(withDuration: 0.25) {
-        if yHeader > 100 && yHeader < 130 {
-            self.viewHeader.highTempLabel.isHidden = true
-            self.viewHeader.lowTempLabel.isHidden = true
-            
-        } else if yHeader > 130 && yHeader < 150 {
-            self.viewHeader.weatherLabel.isHidden = true
-            
-        } else if yHeader > 160 && yHeader < 180 {
-            self.viewHeader.tempLabel.isHidden = true
-            self.viewHeader.tempAndWeatherSecondLabel.isHidden = false
-            self.viewHeader.setupSecondHeader()
-            
-        } else if yHeader < 100 && yHeader > 40 {
-            // move down
-            self.viewHeader.cityLabel.isHidden = false
-            self.viewHeader.highTempLabel.isHidden = false
-            self.viewHeader.lowTempLabel.isHidden = false
-            self.viewHeader.weatherLabel.isHidden = false
-            self.viewHeader.tempLabel.isHidden = false
-            self.viewHeader.tempAndWeatherSecondLabel.isHidden = true
-            
-            self.viewHeader.setupHeader()
-        }
-        self.view.layoutIfNeeded()
+     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let headerViewInitialY = self.viewHeader.frame.origin.y
+        scrollView.addSubview(self.viewHeader)
+        scrollView.delegate = self
+        var headerFrame = viewHeader.frame
+        headerFrame.origin.y = CGFloat(max(headerViewInitialY, scrollView.contentOffset.y))
+        viewHeader.frame = headerFrame
+        let yHeader = scrollView.contentOffset.y + 400
+        self.heightHead.constant = 150
         
+        HeaderCollectionViewCell.animate(withDuration: 0.25) {
+            if yHeader > 100 && yHeader < 130 {
+                self.viewHeader.highTempLabel.isHidden = true
+                self.viewHeader.lowTempLabel.isHidden = true
+                self.reloadUI()
+            } else if yHeader > 130 && yHeader < 150 {
+                self.viewHeader.weatherLabel.isHidden = true
+                self.reloadUI()
+            } else if yHeader > 160 && yHeader < 180 {
+                self.viewHeader.tempLabel.isHidden = true
+                self.viewHeader.tempAndWeatherSecondLabel.isHidden = false
+                self.viewHeader.setupSecondHeader()
+                self.reloadUI()
+            } else if yHeader < 100 && yHeader > 40 {
+                // move down
+                self.viewHeader.cityLabel.isHidden = false
+                self.viewHeader.highTempLabel.isHidden = false
+                self.viewHeader.lowTempLabel.isHidden = false
+                self.viewHeader.weatherLabel.isHidden = false
+                self.viewHeader.tempLabel.isHidden = false
+                self.viewHeader.tempAndWeatherSecondLabel.isHidden = true
+                
+                self.viewHeader.setupHeader()
+                self.reloadUI()
+            }
+            self.reloadUI()
+        }
+        self.lastContentOffset = scrollView.contentOffset.y
     }
-    self.lastContentOffset = scrollView.contentOffset.y
-}
+    
+    private func reloadUI() {
+        self.viewHeader.setNeedsLayout()
+        self.viewHeader.layoutIfNeeded()
+    }
     
     private func configureDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Section, Int>(collectionView: collectionView) {

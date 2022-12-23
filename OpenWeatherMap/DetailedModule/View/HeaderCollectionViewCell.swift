@@ -132,7 +132,12 @@ class HeaderCollectionViewCell: UIView {
         stackViewOfLabels.addArrangedSubview(stackViewOfTemperatureLabels)
         
         cityLabel.text = city
-        
+        setupDataForUI()
+        reloadUI()
+
+    }
+    
+    func setupDataForUI() {
         guard let temperature = temperature else { return }
         var stringLabel = String(format: "%.1f", temperature)
         tempLabel.text = stringLabel + "º"
@@ -164,6 +169,12 @@ class HeaderCollectionViewCell: UIView {
         cityLabel.text = city
         textDiscription = text
         weatherLabel.text = text
+        reloadUI()
+    }
+    
+    private func reloadUI() {
+        setNeedsLayout()
+        layoutIfNeeded()
     }
 
     required init?(coder aDecoder: NSCoder) {
