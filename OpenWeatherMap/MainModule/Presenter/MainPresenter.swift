@@ -59,7 +59,7 @@ class MainPresenter: MainViewPresenterProtocol {
     func getDataFromWheatherApiWithCoordinates(url: String?) {
         networkManager.getDataFromWheatherApiWithCoordinates(url: url) { [weak self] weather in
             guard let self = self else { return }
-            self.weatherData = weather
+            self.weatherDataWithLocation = weather
             self.view?.success()
         }
     }

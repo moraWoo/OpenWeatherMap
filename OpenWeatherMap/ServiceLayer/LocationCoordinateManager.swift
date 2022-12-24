@@ -30,6 +30,7 @@ class LocationCoordinateManager: NSObject, LocationCoordinateManagerProtocol, CL
             }
         }
         completion(coordinates ?? "")
+        getUserAuthorization()
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {

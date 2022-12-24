@@ -94,9 +94,9 @@ class MainViewController: UIViewController, MainViewProtocol {
         citiesTableView.topAnchor.constraint(
             equalTo: titleWeather.bottomAnchor).isActive = true
         citiesTableView.leftAnchor.constraint(
-            equalTo: view.leftAnchor, constant: 20).isActive = true
+            equalTo: view.leftAnchor).isActive = true
         citiesTableView.rightAnchor.constraint(
-            equalTo: view.rightAnchor, constant: -20).isActive = true
+            equalTo: view.rightAnchor).isActive = true
         citiesTableView.bottomAnchor.constraint(
             equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
     }
@@ -154,11 +154,11 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.setSecondLabel()
                 return cell
             } else if indexPath == [0, 0] {
-                cell.lastUpdate = presenter?.weatherData?.city[indexPath.row].city
+                cell.lastUpdate = presenter?.weatherDataWithLocation?.city[0].city // weatherData?.city[indexPath.row].city
                 cell.city = "My Location"
                 
                 cell.temperature = presenter?
-                    .weatherData?
+                    .weatherDataWithLocation?
                     .city[indexPath.row]
                     .tempC
                 cell.imageNameFromData = presenter?

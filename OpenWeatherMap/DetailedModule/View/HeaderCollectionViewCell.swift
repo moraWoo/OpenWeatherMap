@@ -118,9 +118,9 @@ class HeaderCollectionViewCell: UIView {
         stackViewOfLabels.topAnchor.constraint(
             equalTo: topAnchor, constant: 100).isActive = true
         stackViewOfLabels.leftAnchor.constraint(
-            equalTo: leftAnchor, constant: 20).isActive = true
+            equalTo: leftAnchor).isActive = true
         stackViewOfLabels.rightAnchor.constraint(
-            equalTo: rightAnchor, constant: -20).isActive = true
+            equalTo: rightAnchor).isActive = true
         
         stackViewOfTemperatureLabels.addArrangedSubview(highTempLabel)
         stackViewOfTemperatureLabels.addArrangedSubview(lowTempLabel)

@@ -176,11 +176,13 @@ class NetworkManager: NetworkManagerProtocol {
             forecastday: forecastHourly.self,
             forecastWeekly: forecastWeekly.self
         )
+        
         if fromStatic == true {
             addWeatherLocaleWithoutCoordinates(city)
         } else {
             addWeatherLocaleWithCoordinates(city)
         }
+        
         let weather = WeatherLocale(city: citiesWithInfo)
         return weather
     }
